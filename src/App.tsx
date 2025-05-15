@@ -150,7 +150,7 @@ function App() {
                     )}
 
                     {solution && (
-                        <div className="max-h-[calc(100vh-130px)] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-blue-400 scrollbar-track-blue-100 scrollbar-thumb-rounded-full hover:scrollbar-thumb-blue-500">
+                        <div className="max-h-[calc(100vh-130px)] overflow-y-auto pr-2">
                             <div className="space-y-4 px-1">
                                 {solution.steps.map((step, index) => (
                                     <div
