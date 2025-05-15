@@ -7,7 +7,7 @@ export default defineConfig({
     plugins: [react(), tailwindcss()],
     server: {
         proxy: {
-            "/ai/solution": {
+            "/ai/": {
                 target: "http://localhost:8000", // 目标服务器地址
             },
         },

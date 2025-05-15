@@ -1,16 +1,22 @@
 import { useState, useEffect } from "react";
 import ErrorModal from "../Error";
 import "./index.css";
+import { MathJax } from "better-react-mathjax";
 
 // 定义解题结果接口
-interface SolutionResult {
+interface Question {
     steps: { content: string }[];
     knowledge: {
         category: string;
         content: string;
         importance: "HIGH" | "MEDIUM" | "LOW";
     }[];
-    error: string | null;
+}
+
+interface SolutionResult {
+    questions: Question[];
+
+    other_error: string | null;
 }
 
 export default function Solution() {
@@ -22,7 +28,7 @@ export default function Solution() {
 
     // 处理API返回的错误
     useEffect(() => {
-        if (solution && solution.error) {
+        if (solution && solution.other_error) {
             setShowErrorModal(true);
         }
     }, [solution]);
@@ -179,7 +185,9 @@ export default function Solution() {
                                         </div>
                                         <div>
                                             <p className="text-gray-700 leading-relaxed text-base">
-                                                {step.content}
+                                                <MathJax>
+                                                    {step.content}
+                                                </MathJax>
                                             </p>
                                         </div>
                                     </div>
@@ -242,7 +250,7 @@ export default function Solution() {
                                         </span>
                                     </div>
                                     <p className="text-gray-600">
-                                        {item.content}
+                                        <MathJax>{item.content}</MathJax>
                                     </p>
                                 </div>
                             ))}
@@ -260,7 +268,7 @@ export default function Solution() {
             {/* 错误弹窗 */}
             {showErrorModal && (
                 <ErrorModal
-                    error={solution?.error || error || "未知错误"}
+                    error={solution?.other_error || error || "未知错误"}
                     onClose={() => setShowErrorModal(false)}
                 />
             )}

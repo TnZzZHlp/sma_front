@@ -1,5 +1,6 @@
 import Solution from "./components/Solution";
 import Check from "./components/Check";
+import { MathJaxContext } from "better-react-mathjax";
 
 const Route = () => {
     switch (window.location.pathname) {
@@ -12,7 +13,11 @@ const Route = () => {
     }
 };
 function App() {
-    return <Route />;
+    return (
+        <MathJaxContext version={3}>
+            <Route />
+        </MathJaxContext>
+    );
 }
 
 export default App;
