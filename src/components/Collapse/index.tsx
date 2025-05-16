@@ -10,7 +10,7 @@ export default function Collapse({
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div className="mb-4 rounded-lg border border-gray-200 bg-white shadow-md overflow-hidden">
+        <div className="mb-4 rounded-lg border border-gray-200 bg-white shadow-md ">
             <div
                 className="flex justify-between items-center p-4 cursor-pointer select-none hover:bg-gray-50 transition-colors"
                 onClick={() => setIsOpen(!isOpen)}
@@ -31,11 +31,7 @@ export default function Collapse({
                     />
                 </svg>
             </div>
-            <div
-                className={`transition-all duration-500 ease-in-out overflow-hidden ${
-                    isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
-                }`}
-            >
+            <div className={` ${isOpen ? "opacity-100" : "max-h-0 opacity-0"}`}>
                 <div className="p-4 border-t border-gray-200">{children}</div>
             </div>
         </div>

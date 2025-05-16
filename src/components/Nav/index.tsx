@@ -41,11 +41,11 @@ export default function Nav() {
 
 function NavItem({ text, onClick }: { text: string; onClick?: () => void }) {
     return (
-        <div
+        <a
             className={`m-2 cursor-pointer px-4 py-2 rounded-lg transition-all duration-500 ease-in-out  bg-gray-100 hover:bg-gray-200`}
             onClick={onClick}
         >
             {text}
-        </div>
+        </a>
     );
 }
