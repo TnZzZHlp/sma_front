@@ -15,7 +15,6 @@ const Route = () => {
 function App() {
     return (
         <MathJaxContext
-            version={3}
             config={{
                 loader: { load: ["[tex]/html"] },
                 tex: {
