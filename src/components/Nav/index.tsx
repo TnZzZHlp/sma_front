@@ -40,17 +40,10 @@ export default function Nav() {
 }
 
 function NavItem({ text, onClick }: { text: string; onClick?: () => void }) {
-    const [hover, setHover] = useState(false);
-    const hoverStyle = hover ? "bg-gray-100" : "";
-
     return (
         <div
-            className={`m-2 cursor-pointer px-4 py-2 rounded-lg transition-all duration-500 ease-in-out  ${hoverStyle}`}
+            className={`m-2 cursor-pointer px-4 py-2 rounded-lg transition-all duration-500 ease-in-out  bg-gray-100 hover:bg-gray-200`}
             onClick={onClick}
-            onMouseEnter={() => setHover(true)}
-            onMouseLeave={() => setHover(false)}
-            onTouchStart={() => setHover(true)}
-            onTouchEnd={() => setHover(false)}
         >
             {text}
         </div>
