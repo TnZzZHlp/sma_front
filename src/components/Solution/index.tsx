@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import ErrorModal from "../Error";
 import "./index.css";
 import { MathJax } from "better-react-mathjax";
+import Collapse from "../Collapse";
 
 // 定义解题结果接口
 interface Question {
@@ -173,24 +174,35 @@ export default function Solution() {
                     {solution && (
                         <div className="max-h-[calc(100vh-130px)] overflow-y-auto pr-2">
                             <div className="space-y-4 px-1">
-                                {solution.steps.map((step, index) => (
-                                    <div
-                                        key={index}
-                                        className="flex group hover:bg-blue-50 rounded-lg p-3 transition-all duration-200 cursor-default"
+                                {solution.questions.map((question, qIndex) => (
+                                    <Collapse
+                                        title={`第${qIndex + 1}问`}
+                                        key={qIndex}
                                     >
-                                        <div className="flex-shrink-0 mr-4">
-                                            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 text-blue-600 font-semibold group-hover:bg-blue-200 transition-colors">
-                                                {index + 1}
+                                        {question.steps.map((step, index) => (
+                                            <div
+                                                key={index}
+                                                className="flex group bg-blue-50 rounded-lg p-3 transition-all duration-200 cursor-default my-2"
+                                            >
+                                                <div className="flex-shrink-0 mr-4">
+                                                    <div
+                                                        className={`flex items-center justify-center w-8 h-8 rounded-full font-semibold transition-colors `}
+                                                    >
+                                                        {index + 1}
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <p
+                                                        className={`leading-relaxed text-base`}
+                                                    >
+                                                        <MathJax>
+                                                            {step.content}
+                                                        </MathJax>
+                                                    </p>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div>
-                                            <p className="text-gray-700 leading-relaxed text-base">
-                                                <MathJax>
-                                                    {step.content}
-                                                </MathJax>
-                                            </p>
-                                        </div>
-                                    </div>
+                                        ))}
+                                    </Collapse>
                                 ))}
                             </div>
                         </div>
@@ -216,43 +228,58 @@ export default function Solution() {
                     )}
 
                     {solution && (
-                        <div className="space-y-4">
-                            {solution.knowledge.map((item, index) => (
-                                <div
+                        <div className="space-y-4 max-h-[calc(100vh-130px)] overflow-y-auto">
+                            {solution.questions.map((item, index) => (
+                                <Collapse
                                     key={index}
-                                    className={`p-4 rounded-md shadow-sm border-l-4 ${
-                                        item.importance === "HIGH"
-                                            ? "border-red-500"
-                                            : item.importance === "MEDIUM"
-                                            ? "border-yellow-500"
-                                            : "border-green-500"
-                                    }`}
+                                    title={`第${index + 1}问`}
                                 >
-                                    <div className="flex justify-between items-center mb-2">
-                                        <span className="font-medium text-gray-700">
-                                            {item.category}
-                                        </span>
-                                        <span
-                                            className={`px-2 py-1 text-xs rounded-full ${
-                                                item.importance === "HIGH"
-                                                    ? "bg-red-100 text-red-800"
-                                                    : item.importance ===
-                                                      "MEDIUM"
-                                                    ? "bg-yellow-100 text-yellow-800"
-                                                    : "bg-green-100 text-green-800"
-                                            }`}
-                                        >
-                                            {item.importance === "HIGH"
-                                                ? "重要"
-                                                : item.importance === "MEDIUM"
-                                                ? "中等"
-                                                : "普通"}
-                                        </span>
-                                    </div>
-                                    <p className="text-gray-600">
-                                        <MathJax>{item.content}</MathJax>
-                                    </p>
-                                </div>
+                                    {item.knowledge.map((item, index) => {
+                                        return (
+                                            <div
+                                                key={index}
+                                                className={`p-4 rounded-md shadow-sm border-l-4 my-4  ${
+                                                    item.importance === "HIGH"
+                                                        ? "border-red-500"
+                                                        : item.importance ===
+                                                          "MEDIUM"
+                                                        ? "border-yellow-500"
+                                                        : "border-green-500"
+                                                }`}
+                                            >
+                                                <div className="flex justify-between items-center mb-2">
+                                                    <span className="font-medium text-gray-700">
+                                                        {item.category}
+                                                    </span>
+                                                    <span
+                                                        className={`px-2 py-1 text-xs rounded-full ${
+                                                            item.importance ===
+                                                            "HIGH"
+                                                                ? "bg-red-100 text-red-800"
+                                                                : item.importance ===
+                                                                  "MEDIUM"
+                                                                ? "bg-yellow-100 text-yellow-800"
+                                                                : "bg-green-100 text-green-800"
+                                                        }`}
+                                                    >
+                                                        {item.importance ===
+                                                        "HIGH"
+                                                            ? "重要"
+                                                            : item.importance ===
+                                                              "MEDIUM"
+                                                            ? "中等"
+                                                            : "普通"}
+                                                    </span>
+                                                </div>
+                                                <p className="text-gray-600">
+                                                    <MathJax>
+                                                        {item.content}
+                                                    </MathJax>
+                                                </p>
+                                            </div>
+                                        );
+                                    })}
+                                </Collapse>
                             ))}
                         </div>
                     )}

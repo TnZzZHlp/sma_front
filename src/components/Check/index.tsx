@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import ErrorModal from "../Error";
 import "./index.css";
 import { MathJax } from "better-react-mathjax";
+import Collapse from "../Collapse";
 
 // 定义验算结果接口
 interface Question {
@@ -171,39 +172,44 @@ export default function Check() {
 
                     {check && (
                         <div className="max-h-[calc(100vh-130px)] overflow-y-auto pr-2">
-                            <div className="space-y-4 px-1">
-                                {check.steps.map((step, index) => (
-                                    <div
-                                        key={index}
-                                        className="flex group hover:bg-blue-50 rounded-lg p-3 transition-all duration-200 cursor-default"
-                                    >
-                                        <div className="flex-shrink-0 mr-4">
-                                            <div
-                                                className={`flex items-center justify-center w-8 h-8 rounded-full font-semibold transition-colors ${
-                                                    step.is_error
-                                                        ? "bg-red-100 text-red-600 group-hover:bg-red-200"
-                                                        : "bg-green-100 text-green-600 group-hover:bg-green-200"
-                                                }`}
-                                            >
-                                                {index + 1}
+                            {check.questions.map((question, qIndex) => (
+                                <Collapse
+                                    title={`第${qIndex + 1}问`}
+                                    key={qIndex}
+                                >
+                                    {question.steps.map((step, index) => (
+                                        <div
+                                            key={index}
+                                            className="flex group hover:bg-blue-50 rounded-lg p-3 transition-all duration-200 cursor-default"
+                                        >
+                                            <div className="flex-shrink-0 mr-4">
+                                                <div
+                                                    className={`flex items-center justify-center w-8 h-8 rounded-full font-semibold transition-colors ${
+                                                        step.is_error
+                                                            ? "bg-red-100 text-red-600 group-hover:bg-red-200"
+                                                            : "bg-green-100 text-green-600 group-hover:bg-green-200"
+                                                    }`}
+                                                >
+                                                    {index + 1}
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <p
+                                                    className={`leading-relaxed text-base ${
+                                                        step.is_error
+                                                            ? "text-red-500"
+                                                            : "text-gray-700"
+                                                    }`}
+                                                >
+                                                    <MathJax>
+                                                        {step.content}
+                                                    </MathJax>
+                                                </p>
                                             </div>
                                         </div>
-                                        <div>
-                                            <p
-                                                className={`leading-relaxed text-base ${
-                                                    step.is_error
-                                                        ? "text-red-500"
-                                                        : "text-gray-700"
-                                                }`}
-                                            >
-                                                <MathJax>
-                                                    {step.content}
-                                                </MathJax>
-                                            </p>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
+                                    ))}
+                                </Collapse>
+                            ))}
                         </div>
                     )}
 
@@ -228,20 +234,24 @@ export default function Check() {
 
                     {check && (
                         <div className="space-y-4">
-                            {check.knowledge.map((item, index) => (
-                                <div
+                            {check.questions.map((item, index) => (
+                                <Collapse
+                                    title={`第${index + 1}问知识点`}
                                     key={index}
-                                    className="p-4 rounded-md shadow-sm border-l-4"
                                 >
-                                    <div className="flex justify-between items-center mb-2">
-                                        <span className="font-medium text-gray-700">
-                                            {item.category}
-                                        </span>
-                                    </div>
-                                    <p className="text-gray-600">
-                                        <MathJax>{item.content}</MathJax>
-                                    </p>
-                                </div>
+                                    {item.knowledge.map((knowledge, kIndex) => (
+                                        <div
+                                            key={kIndex}
+                                            className="flex flex-col group hover:bg-blue-50 rounded-lg p-3 transition-all duration-200 cursor-default"
+                                        >
+                                            <p className="text-gray-700">
+                                                <MathJax>
+                                                    {knowledge.content}
+                                                </MathJax>
+                                            </p>
+                                        </div>
+                                    ))}
+                                </Collapse>
                             ))}
                         </div>
                     )}

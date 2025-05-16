@@ -14,8 +14,23 @@ const Route = () => {
 };
 function App() {
     return (
-        <MathJaxContext version={3}>
-            {/* 顶端导航模块 */}
+        <MathJaxContext
+            version={3}
+            config={{
+                loader: { load: ["[tex]/html"] },
+                tex: {
+                    packages: { "[+]": ["html"] },
+                    inlineMath: [
+                        ["$", "$"],
+                        ["\\(", "\\)"],
+                    ],
+                    displayMath: [
+                        ["$$", "$$"],
+                        ["\\[", "\\]"],
+                    ],
+                },
+            }}
+        >
             <Nav />
             <Route />
         </MathJaxContext>
