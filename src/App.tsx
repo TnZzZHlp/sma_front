@@ -1,18 +1,10 @@
-import Solution from "./components/Solution";
-import Check from "./components/Check";
 import { MathJaxContext } from "better-react-mathjax";
 import Nav from "./components/Nav";
-const Route = () => {
-    switch (window.location.pathname) {
-        case "/":
-            return <Solution />;
-        case "/check":
-            return <Check />;
-        default:
-            return <Solution />;
-    }
-};
+import { useRouter } from "./router";
+
 function App() {
+    const Component = useRouter();
+
     return (
         <MathJaxContext
             config={{
@@ -31,7 +23,7 @@ function App() {
             }}
         >
             <Nav />
-            <Route />
+            <Component />
         </MathJaxContext>
     );
 }

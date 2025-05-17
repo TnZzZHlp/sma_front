@@ -140,7 +140,7 @@ export default function Check() {
                                     />
                                 </svg>
                                 <p className="text-gray-500">
-                                    点击或拖放图片到这里
+                                    点击这里上传图片
                                 </p>
                             </label>
                         )}
@@ -161,7 +161,7 @@ export default function Check() {
                 {/* 解题步骤 */}
                 <div className="w-full lg:w-1/2 bg-white p-6 rounded-lg shadow-md">
                     <h2 className="text-2xl font-semibold mb-4 text-gray-800">
-                        解题步骤
+                        检查解题步骤
                     </h2>
 
                     {loading && (

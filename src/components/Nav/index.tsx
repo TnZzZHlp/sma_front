@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Route } from "../../router";
 
 export default function Nav() {
     const [showNav, setShowNav] = useState(false);
@@ -8,9 +9,9 @@ export default function Nav() {
  ${showNav ? "top-3" : "-top-14 pb-4"} transition-all duration-500 ease-in-out`}
             onMouseEnter={() => {
                 setShowNav(true);
-                setTimeout(() => {
-                    setShowNav(false);
-                }, 3000);
+            }}
+            onMouseLeave={() => {
+                setShowNav(false);
             }}
             onTouchStart={() => {
                 setShowNav(true);
@@ -22,17 +23,13 @@ export default function Nav() {
             <NavItem
                 text="解题"
                 onClick={() => {
-                    if (window.location.href !== "/" || showNav) {
-                        window.location.href = "/";
-                    }
+                    Route("/");
                 }}
             />
             <NavItem
                 text="检查"
                 onClick={() => {
-                    if (window.location.href !== "/check" || showNav) {
-                        window.location.href = "/check";
-                    }
+                    Route("/check");
                 }}
             />
         </div>
