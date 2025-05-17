@@ -12,12 +12,11 @@ export function Route(path: string) {
 export function useRouter() {
     const [pathname, setPathname] = useState(window.location.pathname);
 
-    // 阻止默认行为
-    window.history.pushState({}, "", pathname);
-
     // 监听 popstate 事件
     window.addEventListener("popstate", () => {
-        setPathname(window.location.pathname);
+        if (window.location.pathname !== pathname) {
+            setPathname(window.location.pathname);
+        }
     });
 
     switch (pathname) {
