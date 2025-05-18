@@ -83,8 +83,7 @@ export default function Check() {
     };
 
     return (
-        <div className="flex flex-col md:flex-row w-full min-h-screen p-4 gap-4 bg-gray-100">
-            {/* 左侧上传区域 */}
+        <>
             <div className="w-full md:w-1/3 bg-white p-6 rounded-lg shadow-md">
                 <h2 className="text-2xl font-semibold mb-4 text-gray-800">
                     上传题目
@@ -271,6 +270,6 @@ export default function Check() {
                     onClose={() => setShowErrorModal(false)}
                 />
             )}
-        </div>
+        </>
     );
 }
