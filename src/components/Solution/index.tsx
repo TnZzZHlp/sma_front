@@ -148,7 +148,7 @@ export default function Solution() {
                     <button
                         type="submit"
                         disabled={loading || !image}
-                        className="w-full py-3 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed active:bg-blue-800 transition-all duration-500 ease-in-out"
+                        className="w-full py-3 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700  disabled:bg-gray-300 disabled:cursor-not-allowed active:bg-blue-800 transition-all duration-500 ease-in-out"
                     >
                         {loading ? "解析中..." : "开始解题"}
                     </button>
